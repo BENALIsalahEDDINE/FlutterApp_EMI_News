@@ -1,6 +1,6 @@
 # flutter_emi_news
 
-A new Flutter application.
+A new Flutter application (EMI News).
 
 ## Getting Started
 
