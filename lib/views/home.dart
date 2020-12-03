@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: <Widget>[
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
               height: 70,
               child: ListView.builder(
                 itemCount: categories.length,
@@ -64,21 +65,52 @@ class CategoryTile extends StatelessWidget {
   CategoryTile({this.imageUrl,this.categoryName});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-       children: <Widget>[
-         ClipRRect(
-           borderRadius: BorderRadius.circular(6),
-            child: Image.network(imageUrl,width: 120,height: 60,fit: BoxFit.cover,)
-         ),
-         Container(
-           child: Text(categoryName,style: TextStyle(
-             color: Colors.white
-           ),),
-         )
-       ],
+    return GestureDetector(
+      onTap: (){
+
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 16),
+        child: Stack(
+         children: <Widget>[
+           ClipRRect(
+             borderRadius: BorderRadius.circular(6),
+              child: Image.network(imageUrl,width: 120,height: 60,fit: BoxFit.cover,)
+           ),
+           Container(
+             alignment: Alignment.center,
+             width: 120,height: 60,
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(6),
+             ),
+
+             child: Text(categoryName,style: TextStyle(
+               color: Colors.white,
+               fontSize: 14,
+               fontWeight: FontWeight.w500
+             ),),
+           )
+         ],
+        ),
       ),
     );
   }
 }
 
+class BlogTile extends StatelessWidget {
+  final String imageUrl,title,desc;
+  BlogTile({@required this.imageUrl,@required this.title,@required this.desc});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: Column(
+          children: <Widget>[
+            Image.network(imageUrl),
+            Text("title"),
+            Text("desc")
+          ],
+        ),
+    );
+  }
+}
