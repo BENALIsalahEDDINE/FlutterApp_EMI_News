@@ -3,8 +3,9 @@ class ArticleModel{
   String title ;
   String description;
   String url;
-  String urlImage;
+  String urlToImage;
   String content;
-  ArticleModel({this.author,this.title,this.url,this.description,this.urlImage,this.content});
+  DateTime publishedAt;
+  ArticleModel({this.author,this.title,this.url,this.description,this.urlToImage,this.content,this.publishedAt});
 
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emi_news/helper/data.dart';
+import 'package:flutter_emi_news/helper/news.dart';
+import 'package:flutter_emi_news/models/article_model.dart';
 import 'package:flutter_emi_news/models/category_model.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +12,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   List<CategoryModel> categories = new List<CategoryModel>();
+  List<ArticleModel> articles = new List<ArticleModel>();
+  bool _loading = true;
 
   @override
   void initState() {
@@ -17,6 +21,16 @@ class _HomeState extends State<Home> {
     super.initState();
     categories = getCategories();
   }
+
+  getNews() async{
+    News newsClass = News();
+    await newsClass.getNews();
+    articles = newsClass.news;
+    setState(() {
+      _loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +47,11 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         elevation: 0.0,
       ),
-      body: Container(
+      body: _loading ? Center(
+          child : Container(
+            child: CircularProgressIndicator(),
+          ),
+      )  : Container(
         child: Column(
           children: <Widget>[
             Container(
