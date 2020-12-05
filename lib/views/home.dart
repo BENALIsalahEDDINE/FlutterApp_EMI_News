@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emi_news/helper/data.dart';
 import 'package:flutter_emi_news/helper/news.dart';
@@ -20,6 +21,7 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     categories = getCategories();
+    getNews();
   }
 
   getNews() async{
@@ -30,14 +32,6 @@ class _HomeState extends State<Home> {
       _loading = false;
     });
   }
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +53,12 @@ class _HomeState extends State<Home> {
           child : Container(
             child: CircularProgressIndicator(),
           ),
-      )  : Container(
-        child: Column(
-          children: <Widget>[
+      )  : SingleChildScrollView(
+        child: Container(
+          child: Column(
+           children: <Widget>[
+
+            ///Categories
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               height: 70,
@@ -75,14 +72,29 @@ class _HomeState extends State<Home> {
                       categoryName: categories[index].categoryName,
                     );
                   }),
-            )
+            ),
 
+
+
+          ///Blogs
+          Container(
+            padding: EdgeInsets.only(top:16),
+            child: ListView.builder(
+              itemCount: articles.length,
+                shrinkWrap: true,
+                itemBuilder: (context,index){
+                return BlogTile(
+                    imageUrl: articles[index].urlToImage,
+                    title: articles[index].title,
+                    desc : articles[index].description,
+                );
+                }),
+          )
           ],
-
         ),
       ),
+    ),
     );
-
   }
 }
 
@@ -101,7 +113,8 @@ class CategoryTile extends StatelessWidget {
          children: <Widget>[
            ClipRRect(
              borderRadius: BorderRadius.circular(6),
-              child: Image.network(imageUrl,width: 120,height: 60,fit: BoxFit.cover,)
+              child: CachedNetworkImage(
+                imageUrl : imageUrl,width: 120,height: 60,fit: BoxFit.cover,)
            ),
            Container(
              alignment: Alignment.center,
@@ -130,11 +143,17 @@ class BlogTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        margin: EdgeInsets.only(bottom: 16),
         child: Column(
           children: <Widget>[
             Image.network(imageUrl),
-            Text("title"),
-            Text("desc")
+            Text(title,style: TextStyle(
+                fontSize: 17,
+                color: Colors.black
+            ),),
+            Text(desc,style: TextStyle(
+                color: Colors.grey
+            ),)
           ],
         ),
     );
