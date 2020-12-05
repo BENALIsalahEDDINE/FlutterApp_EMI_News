@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_emi_news/models/article_model.dart';
 import 'package:http/http.dart' as http;
 class News{
@@ -8,7 +9,7 @@ class News{
 
   Future<void> getNews() async{
 
-    String url = "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=86224fe7511e4121a9cb03579d9e7aa4";
+    String url = "http://newsapi.org/v2/top-headlines?country=us&apiKey=86224fe7511e4121a9cb03579d9e7aa4";
     var response = await http.get(url);
     var jsonData = jsonDecode(response.body);
     if(jsonData['status'] == 'ok'){
@@ -31,13 +32,13 @@ class News{
 
 }
 
-class CategoryNews{
+class CategoryNewsClass{
 
   List<ArticleModel> news = [];
 
-  Future<void> getNews() async{
+  Future<void> getNews(String category) async{
 
-    String url = "http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=86224fe7511e4121a9cb03579d9e7aa4";
+    String url = "http://newsapi.org/v2/top-headlines?country=us&category=$category&apiKey=86224fe7511e4121a9cb03579d9e7aa4";
     var response = await http.get(url);
     var jsonData = jsonDecode(response.body);
     if(jsonData['status'] == 'ok'){
