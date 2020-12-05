@@ -6,6 +6,7 @@ import 'package:flutter_emi_news/models/article_model.dart';
 import 'package:flutter_emi_news/models/category_model.dart';
 import 'package:flutter_emi_news/views/article_view.dart';
 
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
