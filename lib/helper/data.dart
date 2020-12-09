@@ -6,6 +6,9 @@ List<CategoryModel> getCategories(){
   CategoryModel categoryModel = new CategoryModel();
 
 
+
+
+
   //1
   categoryModel.categoryName = "Business";
   categoryModel.imageUrl = "https://www.emi.ac.ma/images/stories/baniere12112012/SNC102700.jpg";
